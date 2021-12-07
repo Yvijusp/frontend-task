@@ -65,26 +65,47 @@ const Login = () => {
 
   if (isLoading) return <LoadingScreen />;
 
+  const formFields = [
+    {
+      value: username,
+      onChange: setUsername,
+      placeholder: 'Username',
+      type: 'text',
+      className: 'input mt-52px',
+      errorField: usernameError,
+    },
+    {
+      value: password,
+      onChange: setPassword,
+      placeholder: 'Password',
+      type: 'password',
+      className: 'input mt-24px',
+      errorField: passwordError,
+    },
+  ];
+
   return (
     <div className='login-page'>
       <form className='login-form' onSubmit={handleSubmit}>
         <h1 className='text-center'>Mygom.tech</h1>
-        <input
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-          placeholder='Username'
-          type='text'
-          className='input mt-52px'
-        />
-        {usernameError && <p>{usernameError}</p>}
-        <input
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          placeholder='Password'
-          type='password'
-          className='input mt-24px'
-        />
-        {passwordError && <p>{passwordError}</p>}
+        {formFields.map(
+          (
+            { value, onChange, placeholder, type, className, errorField },
+            index
+          ) => (
+            <>
+              <input
+                key={index}
+                type={type}
+                value={value}
+                placeholder={placeholder}
+                onChange={(e) => onChange(e.target.value)}
+                className={className}
+              />
+              {errorField && <p key={index}>{errorField}</p>}
+            </>
+          )
+        )}
 
         <ErrorBlock error={errorMessage} />
         <button type='submit' className='button mt-24px'>

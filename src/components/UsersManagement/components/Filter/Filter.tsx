@@ -17,12 +17,34 @@ const Filter: FC<IFilter> = ({ items }) => {
 
   const oldItemsCount = wrongEmails(items, FILTER_OPTIONS.OLD);
 
+  const filtersFields = [
+    {
+      title: 'All',
+      count: items.length,
+      path: Routes.Users,
+    },
+    {
+      title: 'Wrong',
+      count: wrongItemsCount,
+      path: Routes.Wrong,
+    },
+    {
+      title: 'Reused',
+      count: reusedItemsCount,
+      path: Routes.Reused,
+    },
+    {
+      title: 'Old',
+      count: oldItemsCount,
+      path: Routes.Old,
+    },
+  ];
+
   return (
     <div className='filter'>
-      <FilterTab title='All' count={items.length} path={Routes.Users} />
-      <FilterTab title='Wrong' count={wrongItemsCount} path={Routes.Wrong} />
-      <FilterTab title='Reused' count={reusedItemsCount} path={Routes.Reused} />
-      <FilterTab title='Old' count={oldItemsCount} path={Routes.Old} />
+      {filtersFields.map(({ title, count, path }, index) => (
+        <FilterTab key={index} title={title} count={count} path={path} />
+      ))}
     </div>
   );
 };

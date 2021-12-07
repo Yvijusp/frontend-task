@@ -30,31 +30,48 @@ const UsersManagement = () => {
     return <ErrorBlock error={userProviderErrorMessage || errorMessage} />;
   }
 
+  const routes = [
+    {
+      path: Routes.Users,
+      items: items,
+      itemLoading: setIsLoading,
+    },
+    {
+      path: Routes.Wrong,
+      items: items.filter((item) => (itemHasWrongEmail(item) ? null : item)),
+      itemLoading: setIsLoading,
+    },
+    {
+      path: Routes.Reused,
+      items: items.filter((item) => itemHasReusedEmail(item, items)),
+      itemLoading: setIsLoading,
+    },
+    {
+      path: Routes.Old,
+      items: itemHasOldEmail(items),
+      itemLoading: setIsLoading,
+    },
+  ];
+
   return (
     <div className='container'>
       <Header items={items} username={username} />
       <Filter items={items} />
       <Switch>
-        <Route exact path={Routes.Users}>
-          <List items={items} itemLoading={setIsLoading} />
-        </Route>
-        <Route path={Routes.Wrong}>
-          <List
-            items={items.filter((item) =>
-              itemHasWrongEmail(item) ? null : item
-            )}
-            itemLoading={setIsLoading}
-          />
-        </Route>
-        <Route path={Routes.Reused}>
-          <List
-            items={items.filter((item) => itemHasReusedEmail(item, items))}
-            itemLoading={setIsLoading}
-          />
-        </Route>
-        <Route path={Routes.Old}>
-          <List items={itemHasOldEmail(items)} itemLoading={setIsLoading} />
-        </Route>
+        {routes.map(({ path, items, itemLoading }, index) => {
+          if (index === 0) {
+            return (
+              <Route key={index} exact path={path}>
+                <List items={items} itemLoading={itemLoading} />
+              </Route>
+            );
+          }
+          return (
+            <Route key={index} path={path}>
+              <List items={items} itemLoading={itemLoading} />
+            </Route>
+          );
+        })}
       </Switch>
     </div>
   );
