@@ -25,7 +25,7 @@ export const UpdateModal: FC<IUpdateModal> = ({ item, itemLoading }) => {
   return (
     <>
       <button className='update' onClick={() => setShowModal(true)}>
-        Update Password
+        Update Email
       </button>
       <Modal
         className='modal'
@@ -34,7 +34,7 @@ export const UpdateModal: FC<IUpdateModal> = ({ item, itemLoading }) => {
         onRequestClose={() => setShowModal(false)}
         contentLabel='Example Modal'
       >
-        <h1>Update Password</h1>
+        <h1>Update Email</h1>
         <form
           onSubmit={handleSubmit}
           style={{ display: 'flex', flexDirection: 'column' }}
