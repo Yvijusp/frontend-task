@@ -8,7 +8,6 @@ const login = async (username: string, password: string) => {
   });
 
   const response = await fetch(url);
-
   const data = await response.json();
   const { token } = data;
 

@@ -13,3 +13,10 @@ export enum API {
   Items = 'api/items',
   User = 'api/user',
 }
+
+export enum FILTER_OPTIONS {
+  WRONG = 'wrong',
+  REUSED = 'reused',
+  OLD = 'old',
+  ALL = 'all',
+}

@@ -4,7 +4,7 @@ import getUrl from '~/utils/getUrl';
 export enum Roles {
   read = 'read',
   write = 'write',
-  amin = 'amin',
+  admin = 'admin',
 }
 
 export interface IItem {

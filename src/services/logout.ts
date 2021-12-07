@@ -1,5 +1,4 @@
-import { useHistory } from 'react-router-dom';
-import { API, Routes } from '~/constants';
+import { API } from '~/constants';
 import getUrl from '~/utils/getUrl';
 
 const logout = async () => {

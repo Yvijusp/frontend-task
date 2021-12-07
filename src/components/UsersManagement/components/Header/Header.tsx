@@ -1,8 +1,8 @@
 import { FC, useState } from 'react';
 import { useHistory } from 'react-router';
-import { Routes } from '~/constants';
+import { FILTER_OPTIONS, Routes } from '~/constants';
 import { IItem } from '~/services/getUserItems';
-import { OPTIONS, wrongEmails } from '~/utils';
+import { wrongEmails } from '~/utils';
 import logout from '~/services/logout';
 
 import './header-style.scss';
@@ -32,7 +32,7 @@ const Header: FC<IHeader> = ({ items, username }) => {
       <div className='user-section'>
         <button onClick={handleLogout}>{`Logout ${username}`}</button>
       </div>
-      <h1>{`${wrongEmails(items, OPTIONS.ALL)} Emails are wrong`}</h1>
+      <h1>{`${wrongEmails(items, FILTER_OPTIONS.ALL)} Emails are wrong`}</h1>
       <span>
         Email validator to protect your company from bad registrations
       </span>

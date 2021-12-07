@@ -10,6 +10,9 @@ const config: Config.InitialOptions = {
       isolatedModules: true,
     },
   },
+  moduleNameMapper: {
+    '^~(.*)$': '<rootDir>/src/$1',
+  },
 };
 
 export default config;

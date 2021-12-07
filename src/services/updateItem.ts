@@ -1,6 +1,6 @@
 import { API } from '~/constants';
 import getUrl from '~/utils/getUrl';
-import getUserItems, { IItem } from './getUserItems';
+import { IItem } from './getUserItems';
 
 const updateItem = (item: IItem) =>
   fetch(getUrl(API.Items), {

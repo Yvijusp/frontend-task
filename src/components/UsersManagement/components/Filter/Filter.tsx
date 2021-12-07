@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Routes } from '~/constants';
+import { FILTER_OPTIONS, Routes } from '~/constants';
 import { IItem } from '~/services/getUserItems';
-import { OPTIONS, wrongEmails } from '~/utils';
+import { wrongEmails } from '~/utils';
 import FilterTab from './components/FilterTab';
 
 import './filter-style.scss';
@@ -11,11 +11,11 @@ interface IFilter {
 }
 
 const Filter: FC<IFilter> = ({ items }) => {
-  const wrongItemsCount = wrongEmails(items, OPTIONS.WRONG);
+  const wrongItemsCount = wrongEmails(items, FILTER_OPTIONS.WRONG);
 
-  const reusedItemsCount = wrongEmails(items, OPTIONS.REUSED);
+  const reusedItemsCount = wrongEmails(items, FILTER_OPTIONS.REUSED);
 
-  const oldItemsCount = wrongEmails(items, OPTIONS.OLD);
+  const oldItemsCount = wrongEmails(items, FILTER_OPTIONS.OLD);
 
   return (
     <div className='filter'>
