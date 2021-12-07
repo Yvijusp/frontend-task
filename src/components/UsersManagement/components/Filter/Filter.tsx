@@ -1,7 +1,8 @@
 import { FC } from 'react';
-import { Routes } from "~/constants";
-import { IItem } from "~/services/getUserItems";
-import FilterTab from "./components/FilterTab"
+import { FILTER_OPTIONS, Routes } from '~/constants';
+import { IItem } from '~/services/getUserItems';
+import { wrongEmails } from '~/utils';
+import FilterTab from './components/FilterTab';
 
 import './filter-style.scss';
 
@@ -9,20 +10,41 @@ interface IFilter {
   items: Array<IItem>;
 }
 
-const Filter: FC<IFilter> = ({items}) => {
-  const weakItemsCount = items.reduce((count, item) => (
-     (count + 1) 
-  ), 0)
+const Filter: FC<IFilter> = ({ items }) => {
+  const wrongItemsCount = wrongEmails(items, FILTER_OPTIONS.WRONG);
 
-  const reusedItemsCount = items.reduce((count, item) => (
-    (count + 1)
-  ), 0)
+  const reusedItemsCount = wrongEmails(items, FILTER_OPTIONS.REUSED);
+
+  const oldItemsCount = wrongEmails(items, FILTER_OPTIONS.OLD);
+
+  const filtersFields = [
+    {
+      title: 'All',
+      count: items.length,
+      path: Routes.Users,
+    },
+    {
+      title: 'Wrong',
+      count: wrongItemsCount,
+      path: Routes.Wrong,
+    },
+    {
+      title: 'Reused',
+      count: reusedItemsCount,
+      path: Routes.Reused,
+    },
+    {
+      title: 'Old',
+      count: oldItemsCount,
+      path: Routes.Old,
+    },
+  ];
 
   return (
-    <div className="filter">
-      <FilterTab title="all" count={items.length} path={Routes.Users}/>
-      <FilterTab title="Wrong" count={weakItemsCount} path={Routes.Weak}/>
-      <FilterTab title="Reused" count={reusedItemsCount} path={Routes.Reused}/>
+    <div className='filter'>
+      {filtersFields.map(({ title, count, path }, index) => (
+        <FilterTab key={index} title={title} count={count} path={path} />
+      ))}
     </div>
   );
 };
